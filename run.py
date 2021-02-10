@@ -29,10 +29,12 @@ if __name__ == '__main__':
   tokenizer = AutoTokenizer.from_pretrained("gpt2")
   model = AutoModelForCausalLM.from_pretrained("gpt2")
   with open("text.en", "r") as f:
-    input_encoder = tokenizer(f.read(), return_tensors="pt")
+    text = f.read()
+  input_encoder = tokenizer([text for _ in range(100)], return_tensors="pt")
+  print(":: -->", input_encoder["input_ids"].size())
 
   st = time.time()
-  model(input_encoder["input_ids"])
+  model(input_encoder[ "input_ids"])
   print(f"Pytorch inference in {time.time() - st:.5f}s")
   del model, tokenizer
 

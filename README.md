@@ -63,7 +63,14 @@ gpt2.xml
 
 ## Checks
 
-To check if everything works fine run the script `run.py`. You should get outputs like this:
+To check if everything works fine run the script `run.py`. You should start seeing the outputs, the following is on the machine with following configuration:
+```
+MacBook Pro (13-inch, 2020, Four Thunderbolt 3 ports)
+Processor: 2 GHz Quad-Core Intel Core i5
+Memory:    16 GB 3733 MHz LPDDR4X
+Graphics:  Intel Iris Plus Graphics 1536 MB
+```
+The performance results are as follows (`2x` boost):
 ```
 ----------------------------------------------------------------------
 Loading Pytorch model
@@ -78,12 +85,20 @@ OpenVino inference in 0.26206s
 ----------------------------------------------------------------------
 ```
 
-## Specs
+When running on AWS `c5.12xlarge` and batching the data to `128` samples in a batch we see larger performance increase.
+```
+----------------------------------------------------------------------
+Loading Pytorch model
+Pytorch inference in 3.55126s
+----------------------------------------------------------------------
+Creating Inference Engine...
+Loading network
+Loading IR to the plugin...
+exec_net: <openvino.inference_engine.ie_api.ExecutableNetwork object at 0x12c531fb0>
+----------------------------------------------------------------------
+OpenVino inference in 0.78668s
+----------------------------------------------------------------------
+```
+Which is a `5x` boost.
 
-These numbers are verified on this machine: 
-```
-MacBook Pro (13-inch, 2020, Four Thunderbolt 3 ports)
-Processor: 2 GHz Quad-Core Intel Core i5
-Memory:    16 GB 3733 MHz LPDDR4X
-Graphics:  Intel Iris Plus Graphics 1536 MB
-```
+**This proves our hypothesis that larger CPU machines can take advantage of OpenVino's performance in a super-liear fashion.**
