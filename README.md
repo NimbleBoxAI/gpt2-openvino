@@ -1,4 +1,4 @@
-# gpt2-openvino (100% faster)
+# gpt2-openvino (5x faster)
 GPT2 using OpenVino speed up.
 
 ## Installation
@@ -99,6 +99,8 @@ exec_net: <openvino.inference_engine.ie_api.ExecutableNetwork object at 0x12c531
 OpenVino inference in 0.78668s
 ----------------------------------------------------------------------
 ```
-Which is a `5x` boost.
+Which is a `5x` boost. Using OpenVino benchmarking tool we saw even more power throughput working at `134.29ms` of first inference and `17ms` as average processing time across `3522` runs. This is a massive **209x** speed improvement.
+
+<img src="./image.png">
 
 **This proves our hypothesis that larger CPU machines can take advantage of OpenVino's performance in a super-liear fashion.**
