@@ -1,0 +1,6 @@
+.python-version
+bin/
+gpt2.*
+lib/
+pyvenv.cfg
+.DS_Store

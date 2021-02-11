@@ -61,8 +61,9 @@ gpt2.mapping
 gpt2.xml
 ```
 
-## Checks
+## Tests
 
+#### Local Machine
 To check if everything works fine run the script `run.py`. You should start seeing the outputs, the following is on the machine with following configuration:
 ```
 MacBook Pro (13-inch, 2020, Four Thunderbolt 3 ports)
@@ -74,16 +75,38 @@ The performance results are as follows (`2x` boost):
 ```
 ----------------------------------------------------------------------
 Loading Pytorch model
-Pytorch inference in 0.59065s
+:: Pytorch inference in 0.59065s
 ----------------------------------------------------------------------
 Creating Inference Engine...
 Loading network
 Loading IR to the plugin...
 exec_net: <openvino.inference_engine.ie_api.ExecutableNetwork object at 0x12c531fb0>
-----------------------------------------------------------------------
-OpenVino inference in 0.26206s
+:: OpenVino inference in 0.26206s
 ----------------------------------------------------------------------
 ```
+
+In order to test generation capabilities you can pass `--g` flag and get the following results:
+```
+----------------------------------------------------------------------
+Loading Pytorch model
+Text shape: torch.Size([1, 127])
+:: Pytorch inference in 0.46476s
+----------------------------------------------------------------------
+Testing generation
+:: Pytorch generation took (40 steps): 17.663s
+----------------------------------------------------------------------
+Creating Inference Engine...
+Loading network
+Loading IR to the plugin...
+exec_net: <openvino.inference_engine.ie_api.ExecutableNetwork object at 0x130aaffb0>
+:: OpenVino inference in 0.23262s
+----------------------------------------------------------------------
+Testing generation
+:: OpenVino generation took (40 steps): 6.220s
+----------------------------------------------------------------------
+```
+
+#### Cloud Server
 
 When running on AWS `c5.12xlarge` and batching the data to `128` samples in a batch we see larger performance increase.
 ```
